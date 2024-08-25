@@ -54,8 +54,30 @@ jobs:
   #         #   working-directory: ${{env.main_source_path}}
   #         #   env:
   #         #       NODE_AUTH_TOKEN: ${{secrets.NPM_PVSCREATIONS}}
+  deploy-vercel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "checkout"
+        uses: actions/checkout@v2
+      - name: "node"
+        uses: actions/setup-node@v3.8.1
+        with:
+          node-version: 20
+      - name: "build"
+        run: |
+          npm install
+          npm run build
+      - name: "deploy"
+        uses: amondnet/vercel-action@v25 #deploy
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          github-token: ${{ secrets.PAT }} #Optional
+          # vercel-args: '--prod' #Optional
+          vercel-org-id: ${{ secrets.ORG_ID}} #Required
+          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
+          working-directory: ./dist
   release:
-    # needs: [publish]
+    needs: [deploy-vercel]
     runs-on: ubuntu-latest
     # env:
     #   main_source_path: "./"
