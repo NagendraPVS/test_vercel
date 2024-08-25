@@ -83,31 +83,31 @@ jobs:
         run: |
           # Get the latest tag
           latest_tag=$(git describe --tags --abbrev=0 2>/dev/null)
+          echo $latest_tag
+          # # Check if we have any tags
+          # if [ $? -ne 0 ]; then
+          #   echo "No tags found. Starting with version 0.0.0."
+          #   latest_tag="v0.0.0"
+          # fi
 
-          # Check if we have any tags
-          if [ $? -ne 0 ]; then
-            echo "No tags found. Starting with version 0.0.0."
-            latest_tag="v0.0.0"
-          fi
-
-          # Extract major, minor, and patch versions
-          IFS='.' read -r major minor patch <<< "${latest_tag#v}"
-          if [ $patch -lt 9 ]; then
-          patch=$((patch + 1))
-          elif [ $minor -lt 9 ]; then
-              minor=$((minor + 1))
-              patch=0  # Reset patch to 0 when incrementing minor
-          else
-              major=$((major + 1))
-              minor=0  # Reset minor to 0 when incrementing major
-              patch=0   # Reset patch to 0 when incrementing major
-          fi
-          # Increment the version
-          new_version=$major.$minor.$patch
-          # Create the new tag
-          new_tag="v$new_version"
-          echo "New tag: $new_tag"
-          echo "::set-output name=tag::${new_tag}"
+          # # Extract major, minor, and patch versions
+          # IFS='.' read -r major minor patch <<< "${latest_tag#v}"
+          # if [ $patch -lt 9 ]; then
+          # patch=$((patch + 1))
+          # elif [ $minor -lt 9 ]; then
+          #     minor=$((minor + 1))
+          #     patch=0  # Reset patch to 0 when incrementing minor
+          # else
+          #     major=$((major + 1))
+          #     minor=0  # Reset minor to 0 when incrementing major
+          #     patch=0   # Reset patch to 0 when incrementing major
+          # fi
+          # # Increment the version
+          # new_version=$major.$minor.$patch
+          # # Create the new tag
+          # new_tag="v$new_version"
+          # echo "New tag: $new_tag"
+          # echo "::set-output name=tag::${new_tag}"
       - name: "Release"
         uses: softprops/action-gh-release@v2
         with:
