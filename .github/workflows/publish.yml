@@ -151,5 +151,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.tagging.outputs.tag }}
+          body_path: ${{ github.workspace }}-CHANGELOG.txt
         # files: |
         #   ${{env.release_path}}index.js
