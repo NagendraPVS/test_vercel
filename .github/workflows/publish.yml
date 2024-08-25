@@ -67,7 +67,7 @@ jobs:
         run: |
           npm install
           npm run build
-          echo ${{secrets}}
+          echo ${{secrets.VERCEL_TOKEN}}
       - name: "deploy"
         uses: amondnet/vercel-action@v25 #deploy
         with:
