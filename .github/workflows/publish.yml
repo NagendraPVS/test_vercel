@@ -89,5 +89,5 @@ jobs:
         # tag_name: ${{ steps.versioning.outputs.version }}
         # files: |
         #   ${{env.release_path}}index.js
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.PAT }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
