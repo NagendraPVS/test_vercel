@@ -82,6 +82,7 @@ jobs:
       - name: "gettagging"
         id: tagging
         run: |
+          git fetch --tags
           if ! git describe --tags --abbrev=0 2>/dev/null; then
           echo "No tags found. Creating an initial tag v0.0.0."
           git tag v0.0.0
