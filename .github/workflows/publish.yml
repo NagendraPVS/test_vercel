@@ -5,7 +5,8 @@ on:
     branches: [feature/service-workers]
   push:
     branches: [feature/service-workers]
-
+    tags:
+      - "v*.*.*"
 permissions:
   contents: write
   pull-requests: write
