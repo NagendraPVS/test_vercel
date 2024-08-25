@@ -8,9 +8,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-env:
-  VERCEL_ORG_ID: ${{ secrets.ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.PROJECT_ID }}
 jobs:
   # publish:
   #     runs-on: ubuntu-latest
@@ -157,6 +154,3 @@ jobs:
           tag_name: ${{ steps.tagging.outputs.tag }}
         # files: |
         #   ${{env.release_path}}index.js
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
