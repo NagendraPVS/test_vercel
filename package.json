@@ -16,7 +16,8 @@
     "prettier-write": "npx prettier . --write",
     "pdf": "ts-node src/app/results/functions/manage-pdf-content.ts",
     "image": "ts-node src/app/results/functions/manage-img-content.ts.ts",
-    "serve": "npm run build && cd dist && http-server"
+    "serve": "npm run build && cd dist && http-server",
+    "send": "git add . && git commit -m 'test:vercel' && git push"
   },
   "repository": {
     "type": "git",
