@@ -59,9 +59,9 @@ jobs:
   release:
     # needs: [publish]
     runs-on: ubuntu-latest
-    env:
-      main_source_path: "./"
-      release_path: "dist/"
+    # env:
+    #   main_source_path: "./"
+    #   release_path: "dist/"
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -90,5 +90,5 @@ jobs:
         # tag_name: ${{ steps.versioning.outputs.version }}
         # files: |
         #   ${{env.release_path}}index.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.PAT }}
