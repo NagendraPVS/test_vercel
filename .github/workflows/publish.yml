@@ -118,5 +118,6 @@ jobs:
           tag_name: ${{ steps.tagging.outputs.tag }}
         # files: |
         #   ${{env.release_path}}index.js
+
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
