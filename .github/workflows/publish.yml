@@ -82,14 +82,21 @@ jobs:
       - name: "gettagging"
         id: tagging
         run: |
+          # Fetch all tags from the origin (or the specific remote if needed)
           git fetch --tags
-          if ! git describe --tags --abbrev=0 2>/dev/null; then
-          echo "No tags found. Creating an initial tag v0.0.0."
-          git tag v0.0.0
-          fi
 
-          # Get the latest tag
-          latest_tag=$(git describe --tags --abbrev=0)
+          # Check if there are any existing tags
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null)
+
+          if [ $? -ne 0 ]; then
+            if git rev-parse "v0.0.0" >/dev/null 2>&1; then
+              echo "Tag v0.0.0 already exists, skipping creation."
+            else
+              echo "No tags found. Creating an initial tag v0.0.0."
+              git tag v0.0.0
+            fi
+            latest_tag="v0.0.0"
+          fi
 
           # Extract major, minor, and patch versions
           IFS='.' read -r major minor patch <<< "${latest_tag#v}"
@@ -113,6 +120,7 @@ jobs:
 
           # Set output for GitHub Actions
           echo "::set-output name=tag::$new_tag"
+
       - name: "Release"
         uses: softprops/action-gh-release@v2
         with:
