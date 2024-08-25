@@ -68,12 +68,11 @@ jobs:
         run: |
           npm install
           npm run build
-          echo ${{secrets.VERCEL_TOKEN}}
       - name: "deploy"
         uses: amondnet/vercel-action@v25.2.0 #deploy
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-          github-token: ${{ secrets.PAT }} #Optional
+          # github-token: ${{ secrets.PAT }} #Optional
           # vercel-args: '--prod' #Optional
           vercel-org-id: ${{ secrets.ORG_ID}} #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
