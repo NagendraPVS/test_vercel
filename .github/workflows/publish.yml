@@ -88,24 +88,24 @@ jobs:
           # Check if there are any existing tags
           latest_tag=$(git describe --tags --abbrev=0 2>/dev/null)
           status=$?
-          echo "Status of git describe command: $status"
 
           if [ $status -ne 0 ]; then
+            echo "No tags found, or unable to describe the latest tag."
+            
             if git rev-parse "v0.0.0" >/dev/null 2>&1; then
               echo "Tag v0.0.0 already exists, skipping creation."
             else
-              echo "No tags found. Creating an initial tag v0.0.0."
+              echo "Creating an initial tag v0.0.0."
               git tag v0.0.0
             fi
+            
             latest_tag="v0.0.0"
+          else
+            echo "Latest tag: $latest_tag"
           fi
-
-          echo "Latest tag: $latest_tag"
 
           # Extract major, minor, and patch versions
           IFS='.' read -r major minor patch <<< "${latest_tag#v}"
-
-          echo "Version components - Major: $major, Minor: $minor, Patch: $patch"
 
           # Increment the version
           if [ $patch -lt 9 ]; then
