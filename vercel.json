@@ -4,6 +4,7 @@
   "github": {
     "enabled": false
   },
+  "name": "test_vercel",
   "builds": [{ "src": "./dist", "use": "@vercel/static" }],
   "headers": [
     {
