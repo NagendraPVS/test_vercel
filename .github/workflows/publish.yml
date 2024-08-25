@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [feature/service-workers]
   push:
-    branches: [feature/service-worker]
+    branches: [feature/service-workers]
 permissions:
   contents: write
   pull-requests: write
