@@ -79,7 +79,8 @@ jobs:
           git config --global user.email "${{github.actor}}@users.noreply.github.com"
           git config --global user.name "${{github.actor}}"
           echo "hell"
-      - name: "tagging"
+      - name: "gettagging"
+        id: tagging
         run: |
           if ! git describe --tags --abbrev=0 2>/dev/null; then
           echo "No tags found. Creating an initial tag v0.0.0."
